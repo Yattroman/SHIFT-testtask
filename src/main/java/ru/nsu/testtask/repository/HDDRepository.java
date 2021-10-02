@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import ru.nsu.testtask.data.entity.HDD;
 
 @Repository
-@Primary
 @Qualifier("hddRepository")
 public interface HDDRepository extends ProductRepository<HDD, Integer> {
 }

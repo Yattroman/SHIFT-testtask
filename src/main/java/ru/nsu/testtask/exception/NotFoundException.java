@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Setter
 @Getter
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class ProductNotFoundException extends RuntimeException {
+public class NotFoundException extends RuntimeException {
 
-    public ProductNotFoundException(String message) {
+    public NotFoundException(String message) {
         super(message);
     }
 

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @DiscriminatorColumn
-public class Product {
+public class Product implements ENTITY{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,19 +21,14 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
     private Long serialNumber;
 
-    @Column(nullable = false)
     private String producer;
 
-    @Column(nullable = false)
     private Double price;
 
-    @Column(nullable = false)
     private Integer stockQuantity;
 
-    @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private ProductType productType;
 
