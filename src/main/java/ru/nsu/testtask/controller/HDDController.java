@@ -3,6 +3,7 @@ package ru.nsu.testtask.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.nsu.testtask.data.dto.DesktopComputerDTO;
 import ru.nsu.testtask.data.dto.HDDDTO;
 import ru.nsu.testtask.data.dto.HDDDTO;
 import ru.nsu.testtask.data.entity.HDD;
@@ -14,6 +15,7 @@ import ru.nsu.testtask.service.HDDService;
 import ru.nsu.testtask.service.HDDService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/products/hdds")
@@ -23,9 +25,10 @@ public class HDDController extends AbstractController<HDD, HDDDTO> {
     }
 
     @GetMapping
-    private ResponseEntity<List<HDD>> getByType(){
+    private ResponseEntity<List<HDDDTO>> getByType(){
         HDDService service = (HDDService) getService();
-        return new ResponseEntity<>(service.findAllByType(ProductType.HDD), HttpStatus.OK);
+        List<HDDDTO> dtoList = service.findAllByType(ProductType.HDD).stream().map((e) -> getAbstractMapper().toDTO(e)).collect(Collectors.toList());
+        return new ResponseEntity<>(dtoList, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

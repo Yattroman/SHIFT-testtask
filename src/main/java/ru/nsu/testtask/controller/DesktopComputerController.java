@@ -1,5 +1,6 @@
 package ru.nsu.testtask.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import ru.nsu.testtask.service.CrudService;
 import ru.nsu.testtask.service.DesktopComputerService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/products/desktopComputers")
@@ -20,9 +22,10 @@ public class DesktopComputerController extends AbstractController<DesktopCompute
     }
 
     @GetMapping
-    private ResponseEntity<List<DesktopComputer>> getByType(){
+    private ResponseEntity<List<DesktopComputerDTO>> getByType(){
         DesktopComputerService service = (DesktopComputerService) getService();
-        return new ResponseEntity<>(service.findAllByType(ProductType.DESKTOP_COMPUTER), HttpStatus.OK);
+        List<DesktopComputerDTO> dtoList = service.findAllByType(ProductType.DESKTOP_COMPUTER).stream().map((e) -> getAbstractMapper().toDTO(e)).collect(Collectors.toList());
+        return new ResponseEntity<>(dtoList, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

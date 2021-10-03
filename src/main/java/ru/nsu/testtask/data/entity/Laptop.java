@@ -3,10 +3,9 @@ package ru.nsu.testtask.data.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import ru.nsu.testtask.data.enums.LaptopDiagonal;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -16,7 +15,8 @@ import javax.persistence.Entity;
 public class Laptop extends Product{
 
     @Column
-    private Double diagonal;
+    @Enumerated(EnumType.STRING)
+    private LaptopDiagonal diagonal;
 
     public Laptop() {}
 }

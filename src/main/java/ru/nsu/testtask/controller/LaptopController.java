@@ -3,6 +3,7 @@ package ru.nsu.testtask.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.nsu.testtask.data.dto.DesktopComputerDTO;
 import ru.nsu.testtask.data.dto.HDDDTO;
 import ru.nsu.testtask.data.dto.LaptopDTO;
 import ru.nsu.testtask.data.entity.DesktopComputer;
@@ -15,6 +16,7 @@ import ru.nsu.testtask.service.DesktopComputerService;
 import ru.nsu.testtask.service.LaptopService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/products/laptops")
@@ -24,9 +26,10 @@ public class LaptopController extends AbstractController<Laptop, LaptopDTO> {
     }
 
     @GetMapping
-    private ResponseEntity<List<Laptop>> getByType(){
+    private ResponseEntity<List<LaptopDTO>> getByType(){
         LaptopService service = (LaptopService) getService();
-        return new ResponseEntity<>(service.findAllByType(ProductType.LAPTOP), HttpStatus.OK);
+        List<LaptopDTO> dtoList = service.findAllByType(ProductType.LAPTOP).stream().map((e) -> getAbstractMapper().toDTO(e)).collect(Collectors.toList());
+        return new ResponseEntity<>(dtoList, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
