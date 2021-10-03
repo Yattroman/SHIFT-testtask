@@ -6,7 +6,6 @@ import ru.nsu.testtask.data.enums.ProductType;
 import ru.nsu.testtask.repository.DesktopComputerRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DesktopComputerService extends AbstractCrudService<DesktopComputer>{

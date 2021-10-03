@@ -10,6 +10,7 @@ import ru.nsu.testtask.data.entity.DesktopComputer;
 import ru.nsu.testtask.data.entity.HDD;
 import ru.nsu.testtask.data.entity.Laptop;
 import ru.nsu.testtask.data.enums.ProductType;
+import ru.nsu.testtask.exception.NotFoundException;
 import ru.nsu.testtask.mapper.AbstractMapper;
 import ru.nsu.testtask.service.CrudService;
 import ru.nsu.testtask.service.DesktopComputerService;
@@ -35,19 +36,17 @@ public class LaptopController extends AbstractController<Laptop, LaptopDTO> {
     @PutMapping("/{id}")
     private ResponseEntity<LaptopDTO> update(@PathVariable("id") int id, @RequestBody LaptopDTO dto) {
 
-        var LaptopData = getService().getById(id);
-        if(LaptopData.isPresent()){
-            Laptop laptop = LaptopData.get();
-            laptop.setName(dto.getName());
-            laptop.setPrice(dto.getPrice());
-            laptop.setStockQuantity(dto.getStockQuantity());
-            laptop.setProductType(dto.getProductType());
-            laptop.setDiagonal(dto.getDiagonal());
-            getService().update(laptop);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        var laptop = getService().getById(id)
+                .orElseThrow(() -> new NotFoundException("The Laptop with id " + id + " is not found"));
+
+        laptop.setName(dto.getName());
+        laptop.setPrice(dto.getPrice());
+        laptop.setStockQuantity(dto.getStockQuantity());
+        laptop.setProductType(dto.getProductType());
+        laptop.setDiagonal(dto.getDiagonal());
+        getService().update(laptop);
+
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 

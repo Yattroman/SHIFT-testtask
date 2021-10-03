@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.nsu.testtask.data.dto.DesktopComputerDTO;
 import ru.nsu.testtask.data.entity.DesktopComputer;
 import ru.nsu.testtask.data.enums.ProductType;
+import ru.nsu.testtask.exception.NotFoundException;
 import ru.nsu.testtask.mapper.AbstractMapper;
 import ru.nsu.testtask.service.CrudService;
 import ru.nsu.testtask.service.DesktopComputerService;
@@ -31,19 +32,17 @@ public class DesktopComputerController extends AbstractController<DesktopCompute
     @PutMapping("/{id}")
     private ResponseEntity<DesktopComputerDTO> update(@PathVariable("id") int id, @RequestBody DesktopComputerDTO dto) {
 
-        var desktopComputerData = getService().getById(id);
-        if(desktopComputerData.isPresent()){
-            DesktopComputer desktopComputer = desktopComputerData.get();
-            desktopComputer.setName(dto.getName());
-            desktopComputer.setPrice(dto.getPrice());
-            desktopComputer.setStockQuantity(dto.getStockQuantity());
-            desktopComputer.setProductType(dto.getProductType());
-            desktopComputer.setType(dto.getType());
-            getService().update(desktopComputer);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        var desktopComputer = getService().getById(id)
+                .orElseThrow(() -> new NotFoundException("The Desktop Computer with id " + id + " is not found"));
+
+        desktopComputer.setName(dto.getName());
+        desktopComputer.setPrice(dto.getPrice());
+        desktopComputer.setStockQuantity(dto.getStockQuantity());
+        desktopComputer.setProductType(dto.getProductType());
+        desktopComputer.setType(dto.getType());
+        getService().update(desktopComputer);
+
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 

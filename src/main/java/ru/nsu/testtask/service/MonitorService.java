@@ -1,10 +1,8 @@
 package ru.nsu.testtask.service;
 
 import org.springframework.stereotype.Service;
-import ru.nsu.testtask.data.entity.HDD;
 import ru.nsu.testtask.data.entity.Monitor;
 import ru.nsu.testtask.data.enums.ProductType;
-import ru.nsu.testtask.repository.HDDRepository;
 import ru.nsu.testtask.repository.MonitorRepository;
 
 import java.util.List;
