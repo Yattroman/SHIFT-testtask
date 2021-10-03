@@ -1,22 +1,37 @@
 package ru.nsu.testtask.mapper;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.nsu.testtask.data.dto.DesktopComputerDTO;
+import ru.nsu.testtask.data.dto.LaptopDTO;
 import ru.nsu.testtask.data.entity.DesktopComputer;
 
-@RequiredArgsConstructor
 @Component
-public class DesktopComputerMapper implements Mapper<DesktopComputer, DesktopComputerDTO> {
+public class DesktopComputerMapper implements AbstractMapper<DesktopComputer, DesktopComputerDTO> {
 
     @Override
-    public DesktopComputer toEntity(DesktopComputerDTO dto) {
-        return null;
+    public DesktopComputer toEntity(DesktopComputerDTO dto){
+        DesktopComputer desktopComputer = new DesktopComputer();
+        desktopComputer.setName(dto.getName());
+        desktopComputer.setPrice(dto.getPrice());
+        desktopComputer.setStockQuantity(dto.getStockQuantity());
+        desktopComputer.setType(dto.getType());
+
+        if(dto.getId() != null){
+            desktopComputer.setId(dto.getId());
+        }
+
+        return desktopComputer;
     }
 
     @Override
-    public DesktopComputerDTO toDTO(DesktopComputer entity) {
-        return null;
+    public DesktopComputerDTO toDTO(DesktopComputer entity){
+        return new DesktopComputerDTO(
+                entity.getId(),
+                entity.getName(),
+                entity.getPrice(),
+                entity.getStockQuantity(),
+                entity.getType()
+        );
     }
 
 }

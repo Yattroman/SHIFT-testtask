@@ -1,21 +1,37 @@
 package ru.nsu.testtask.mapper;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.nsu.testtask.data.dto.LaptopDTO;
+import ru.nsu.testtask.data.dto.MonitorDTO;
 import ru.nsu.testtask.data.entity.Laptop;
 
-@RequiredArgsConstructor
 @Component
-public class LaptopMapper implements Mapper<Laptop, LaptopDTO>{
+public class LaptopMapper implements AbstractMapper<Laptop, LaptopDTO> {
 
     @Override
-    public Laptop toEntity(LaptopDTO dto) {
-        return null;
+    public Laptop toEntity(LaptopDTO dto){
+        Laptop laptop = new Laptop();
+        laptop.setName(dto.getName());
+        laptop.setPrice(dto.getPrice());
+        laptop.setStockQuantity(dto.getStockQuantity());
+        laptop.setDiagonal(dto.getDiagonal());
+
+        if(dto.getId() != null){
+            laptop.setId(dto.getId());
+        }
+
+        return laptop;
     }
 
     @Override
-    public LaptopDTO toDTO(Laptop entity) {
-        return null;
+    public LaptopDTO toDTO(Laptop entity){
+        return new LaptopDTO(
+                entity.getId(),
+                entity.getName(),
+                entity.getPrice(),
+                entity.getStockQuantity(),
+                entity.getDiagonal()
+        );
     }
+
 }

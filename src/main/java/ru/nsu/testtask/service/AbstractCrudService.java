@@ -8,7 +8,6 @@ import ru.nsu.testtask.repository.AbstractRepository;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-@Service
 public abstract class AbstractCrudService<E extends Product> implements CrudService<E> {
 
     private final AbstractRepository<E, Integer> repository;

@@ -1,21 +1,36 @@
 package ru.nsu.testtask.mapper;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.nsu.testtask.data.dto.MonitorDTO;
 import ru.nsu.testtask.data.entity.Monitor;
 
-@RequiredArgsConstructor
 @Component
-public class MonitorMapper implements Mapper<Monitor, MonitorDTO>{
+public class MonitorMapper implements AbstractMapper<Monitor, MonitorDTO> {
 
     @Override
-    public Monitor toEntity(MonitorDTO dto) {
-        return null;
+    public Monitor toEntity(MonitorDTO dto){
+        Monitor monitor = new Monitor();
+        monitor.setName(dto.getName());
+        monitor.setPrice(dto.getPrice());
+        monitor.setStockQuantity(dto.getStockQuantity());
+        monitor.setDiagonal(dto.getDiagonal());
+
+        if(dto.getId() != null){
+            monitor.setId(dto.getId());
+        }
+
+        return monitor;
     }
 
     @Override
-    public MonitorDTO toDTO(Monitor entity) {
-        return null;
+    public MonitorDTO toDTO(Monitor entity){
+        return new MonitorDTO(
+                entity.getId(),
+                entity.getName(),
+                entity.getPrice(),
+                entity.getStockQuantity(),
+                entity.getDiagonal()
+        );
     }
+
 }

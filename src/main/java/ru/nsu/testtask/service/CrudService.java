@@ -1,7 +1,6 @@
 package ru.nsu.testtask.service;
 
 import ru.nsu.testtask.data.entity.ENTITY;
-import ru.nsu.testtask.data.entity.Product;
 
 import java.util.Optional;
 

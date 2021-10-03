@@ -1,13 +1,18 @@
 package ru.nsu.testtask.data.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class ProductDTO implements DTO{
 
-    private Long id;
+    private Integer id;
 
     @NotEmpty
     private String name;
