@@ -2,9 +2,7 @@ package ru.nsu.testtask.mapper;
 
 import org.springframework.stereotype.Component;
 import ru.nsu.testtask.data.dto.HDDDTO;
-import ru.nsu.testtask.data.dto.LaptopDTO;
 import ru.nsu.testtask.data.entity.HDD;
-import ru.nsu.testtask.data.entity.Laptop;
 
 @Component
 public class HDDMapper implements AbstractMapper<HDD, HDDDTO> {
@@ -15,6 +13,7 @@ public class HDDMapper implements AbstractMapper<HDD, HDDDTO> {
         hdd.setName(dto.getName());
         hdd.setPrice(dto.getPrice());
         hdd.setStockQuantity(dto.getStockQuantity());
+        hdd.setProductType(dto.getProductType());
         hdd.setVolume(dto.getVolume());
 
         if(dto.getId() != null){
@@ -31,6 +30,7 @@ public class HDDMapper implements AbstractMapper<HDD, HDDDTO> {
                 entity.getName(),
                 entity.getPrice(),
                 entity.getStockQuantity(),
+                entity.getProductType(),
                 entity.getVolume()
         );
     }

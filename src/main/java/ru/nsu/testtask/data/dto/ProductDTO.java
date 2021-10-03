@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import ru.nsu.testtask.data.enums.ProductType;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -22,6 +23,9 @@ public class ProductDTO implements DTO{
 
     @NotEmpty
     private Integer stockQuantity;
+
+    @NotEmpty
+    private ProductType productType;
 
     public ProductDTO() {}
 

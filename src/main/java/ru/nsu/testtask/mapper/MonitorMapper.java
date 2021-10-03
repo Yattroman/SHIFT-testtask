@@ -13,6 +13,7 @@ public class MonitorMapper implements AbstractMapper<Monitor, MonitorDTO> {
         monitor.setName(dto.getName());
         monitor.setPrice(dto.getPrice());
         monitor.setStockQuantity(dto.getStockQuantity());
+        monitor.setProductType(dto.getProductType());
         monitor.setDiagonal(dto.getDiagonal());
 
         if(dto.getId() != null){
@@ -29,6 +30,7 @@ public class MonitorMapper implements AbstractMapper<Monitor, MonitorDTO> {
                 entity.getName(),
                 entity.getPrice(),
                 entity.getStockQuantity(),
+                entity.getProductType(),
                 entity.getDiagonal()
         );
     }

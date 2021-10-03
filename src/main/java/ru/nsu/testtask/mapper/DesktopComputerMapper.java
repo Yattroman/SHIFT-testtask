@@ -2,7 +2,6 @@ package ru.nsu.testtask.mapper;
 
 import org.springframework.stereotype.Component;
 import ru.nsu.testtask.data.dto.DesktopComputerDTO;
-import ru.nsu.testtask.data.dto.LaptopDTO;
 import ru.nsu.testtask.data.entity.DesktopComputer;
 
 @Component
@@ -14,6 +13,7 @@ public class DesktopComputerMapper implements AbstractMapper<DesktopComputer, De
         desktopComputer.setName(dto.getName());
         desktopComputer.setPrice(dto.getPrice());
         desktopComputer.setStockQuantity(dto.getStockQuantity());
+        desktopComputer.setProductType(dto.getProductType());
         desktopComputer.setType(dto.getType());
 
         if(dto.getId() != null){
@@ -30,6 +30,7 @@ public class DesktopComputerMapper implements AbstractMapper<DesktopComputer, De
                 entity.getName(),
                 entity.getPrice(),
                 entity.getStockQuantity(),
+                entity.getProductType(),
                 entity.getType()
         );
     }

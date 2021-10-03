@@ -1,5 +1,6 @@
 package ru.nsu.testtask.controller;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,10 @@ import ru.nsu.testtask.exception.NotFoundException;
 import ru.nsu.testtask.mapper.AbstractMapper;
 import ru.nsu.testtask.service.CrudService;
 
+import java.util.List;
+
 @RequiredArgsConstructor
+@Getter
 public class AbstractController<E extends ENTITY, D extends DTO> {
 
     private final CrudService<E> service;
@@ -26,12 +30,6 @@ public class AbstractController<E extends ENTITY, D extends DTO> {
     @PostMapping
     private ResponseEntity<E> create(@RequestBody D dto) {
         service.add(abstractMapper.toEntity(dto));
-        return ResponseEntity.ok().build();
-    }
-
-    @PutMapping
-    private ResponseEntity<E> update(@RequestBody D dto) {
-        service.update(abstractMapper.toEntity(dto));
         return ResponseEntity.ok().build();
     }
 
