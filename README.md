@@ -1,19 +1,14 @@
 # Тестовое задание ШИФТ ЛАБ
 ## Инструкция по сборке и запуску программы
-
-### Готовый запуск
-
-Прописать в консоли прописать
-'''
-mvn spring-boot:run
-'''
-
+В открытой в консоли директории проекта прописать команды ниже 
 ### Сборка 'jar' файла при помощи maven
-
-'''
+```
 mvn install
-'''
-
+```
+### Готовый запуск
+```
+mvn spring-boot:run
+```
 ## API back-end приложения 
 ![laptopController](/picturesForReadMe/laptopController.png)
 ![monitorController](/picturesForReadMe/monitorController.png)
